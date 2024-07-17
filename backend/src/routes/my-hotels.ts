@@ -40,17 +40,17 @@ const upload = multer({
         
 
        // 1) Upload images to cloudinary
-       //const uploadPromises = imageFiles.map(async(image)=>{
-       // const b64 = Buffer.from(image.buffer).toString("base64")
-       // let dataURI = "data:"+ image.mimetype + ";base64," + b64;
-       // const res = await cloudinary.v2.uploader.upload(dataURI)
-       // return res.URL
-       //})
+       const uploadPromises = imageFiles.map(async(image)=>{
+        const b64 = Buffer.from(image.buffer).toString("base64")
+        let dataURI = "data:"+ image.mimetype + ";base64," + b64;
+        const res = await cloudinary.v2.uploader.upload(dataURI)
+        return res.url
+       })
 //
-       //const imageUrls = await Promise.all(uploadPromises)
+       const imageUrls = await Promise.all(uploadPromises)
 
 
-        const imageUrls = await uploadImages(imageFiles);
+        //const imageUrls = await uploadImages(imageFiles);   agar galat hua dobara to ise unquote karna h or upar wale ko quote
        ////const imageUrls = await uploadImages(imageFiles);
        newHotel.imageUrls = imageUrls
        newHotel.lastUpdated=new Date()
