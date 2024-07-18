@@ -5,7 +5,8 @@ import { param, validationResult } from "express-validator";
 import Stripe from "stripe"
 import verifyToken from "../middleware/auth";
 
-const stripe = new Stripe(process.env.STRIPE_API_KEY as string);
+//const stripe = new Stripe(process.env.STRIPE_API_KEY as string);
+const stripe  = new Stripe("sk_test_51PcLclRx2Bbg4XKhu5jFCLC1ALXz0Vob7o5Neazrw09dVErOQ65EeP2SAkNkx1VzgkAROB7MWvJKlbrWvRVpxNov00yxRoIUhd")
 const router = express.Router();
 
 //router.get("/search",async(req:Request , res:Response)=>{

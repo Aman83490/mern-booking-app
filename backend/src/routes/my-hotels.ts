@@ -122,7 +122,15 @@ router.put(
       }
 
       const files = req.files as Express.Multer.File[];
-      const updatedImageUrls = await uploadImages(files);
+      const uploadPromises = files.map(async(image)=>{
+        const b64 = Buffer.from(image.buffer).toString("base64")
+        let dataURI = "data:"+ image.mimetype + ";base64," + b64;
+        const res = await cloudinary.v2.uploader.upload(dataURI)
+        return res.url
+       })
+//
+       const updatedImageUrls = await Promise.all(uploadPromises)
+      //const updatedImageUrls = await uploadImages(files);
 
       hotel.imageUrls = [
         ...updatedImageUrls,
